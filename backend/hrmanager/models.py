@@ -1,0 +1,11 @@
+from django.db import models
+
+
+class Employee(models.Model):
+    name = models.CharField(max_length=70)
+    email = models.EmailField(max_length=50, unique=True)
+    position = models.CharField(max_length=30)
+    salary = models.CharField(max_length=10)
+    employed_date = models.DateField()
+    project = models.CharField(max_length=50)
+    bank_account = models.CharField(max_length=26, unique=True)
