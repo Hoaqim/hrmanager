@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import CustomModal from "./Modal.js";
 import axios from "axios";
+import MenuBar from './MenuBar.js';
+import Payment from './Payment.js';
 
 export default class Employee extends Component {
   constructor(props) {
@@ -9,8 +11,11 @@ export default class Employee extends Component {
       employeeList: [],
       modal: false,
       activeItem: {
-        name: "",
-        position: "",
+        name: "", 
+        email: "", 
+        position:"", 
+        salary:"", 
+        bank_account:"",
       },
     };
   }
@@ -51,7 +56,7 @@ export default class Employee extends Component {
   }
 
   createItem = () => {
-    const item = { name: "", email: "", position:"", salary:"", employed_date:"", project:"" };
+    const item = { name: "", email: "", position:"", salary:"", bank_account:"" };
 
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
@@ -68,11 +73,11 @@ export default class Employee extends Component {
       <li className="item-id"
       key={item.id}
       >
-        <span 
+        <span
         className="item-name"
-        title={item.name}
+        title={item.email}
         >
-        {item.email}
+        {item.name}
         </span>
         <span>
           <button onClick={() => this.editItem(item)}>
@@ -81,6 +86,8 @@ export default class Employee extends Component {
           <button className="btn brn-secondary" onClick={() => this.handleDelete(item)}>
             delete
           </button>
+
+          <Payment name={item.name} bank_account={item.bank_account} salary={item.salary}></Payment>
         </span>
       </li>
     ))
@@ -89,6 +96,9 @@ export default class Employee extends Component {
   render(){
     return(
       <div className="container">
+        <div className="menu">
+          <MenuBar></MenuBar>
+        </div>
         <h1>List of employees</h1>
           <div className="button">
             <button className="btn btn-primary" onClick={this.createItem}>

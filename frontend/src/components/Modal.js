@@ -83,28 +83,17 @@ export default class CustomModal extends Component {
                         </FormGroup>
 
                         <FormGroup>
-                        <Label for="employee-employed_date">Date of employment</Label>
+                        <Label for="employee-account">Bank account</Label>
                         <Input
                             type="text"
-                            id="employee-employed_date"
-                            name="employed_date"
-                            value={this.state.activeItem.employed_date}
+                            id="employee-account"
+                            name="bank_account"
+                            value={this.state.activeItem.bank_account}
                             onChange={this.handleChange}
-                            placeholder="Enter date of employment"
+                            placeholder="Enter employee's bank account"
                         />
                         </FormGroup>
 
-                        <FormGroup>
-                        <Label for="employee-project">Project</Label>
-                        <Input
-                            type="text"
-                            id="employee-project"
-                            name="project"
-                            value={this.state.activeItem.project}
-                            onChange={this.handleChange}
-                            placeholder="Enter employee's project"
-                        />
-                        </FormGroup>
                     </Form>
                     <ModalFooter>
                         <Button onClick={() => onSave(this.state.activeItem)}></Button>
