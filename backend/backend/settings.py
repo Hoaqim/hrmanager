@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'rest_framework',
     'corsheaders',
     'stripe',
+    'payment'
 ]
 
 MIDDLEWARE = [
@@ -104,6 +105,11 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': [
+        'rest_framework.permissions.AllowAny'
+    ]
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -132,3 +138,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
+
+STRIPE_SECRET_KEY = 'sk_test_51KXNW9B8Cwjy3SIYUichTYbAAGFouOx5v3lQ2DG9OUVrKxQ4e1SOvCBQQOx3m9DKUYKdqoF8mSA1CGAW5i1Se7tr00HYC22Ndj'

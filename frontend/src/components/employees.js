@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import CustomModal from "./Modal.js";
 import axios from "axios";
-import MenuBar from './MenuBar.js';
 import Payment from './Payment.js';
 
 export default class Employee extends Component {
@@ -40,7 +39,7 @@ export default class Employee extends Component {
     this.toggle();
     if (item.id){
       axios
-      .put(`api/employees/${item.id}`, item)
+      .put(`api/employees/${item.id}/`, item)
       .then((res) => this.refreshList());
       return;
     }
@@ -97,7 +96,6 @@ export default class Employee extends Component {
     return(
       <div className="container">
         <div className="menu">
-          <MenuBar></MenuBar>
         </div>
         <h1>List of employees</h1>
           <div className="button">
