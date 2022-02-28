@@ -96,7 +96,7 @@ export default class CustomModal extends Component {
 
                     </Form>
                     <ModalFooter>
-                        <Button onClick={() => onSave(this.state.activeItem)}></Button>
+                        <Button onClick={() => onSave(this.state.activeItem)}>Save</Button>
                     </ModalFooter>
                 </ModalBody>
           </Modal>

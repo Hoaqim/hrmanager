@@ -11,16 +11,22 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
 from pathlib import Path
+import os
+from dotenv import load_dotenv, find_dotenv
 
+load_dotenv(find_dotenv())
+
+SECRET_KEY = os.environ['SECRET_KEY']
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
+
 
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/3.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-y0=2n8j(ppv*x0sdis##adt@%54ju+(g@=cxw=p_+(nt2!vwnv'
+
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -40,8 +46,6 @@ INSTALLED_APPS = [
     'hrmanager',
     'rest_framework',
     'corsheaders',
-    'stripe',
-    'payment'
 ]
 
 MIDDLEWARE = [
@@ -105,11 +109,6 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.AllowAny'
-    ]
-}
 
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
@@ -138,5 +137,3 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 CORS_ORIGIN_WHITELIST = [
      'http://localhost:3000'
 ]
-
-STRIPE_SECRET_KEY = 'sk_test_51KXNW9B8Cwjy3SIYUichTYbAAGFouOx5v3lQ2DG9OUVrKxQ4e1SOvCBQQOx3m9DKUYKdqoF8mSA1CGAW5i1Se7tr00HYC22Ndj'

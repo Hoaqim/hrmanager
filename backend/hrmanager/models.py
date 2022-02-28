@@ -1,8 +1,5 @@
 from django.db import models
 from django.conf import settings
-import stripe
-
-stripe.api_key = settings.STRIPE_SECRET_KEY
 
 class Employee(models.Model):
     name = models.CharField(max_length=70)

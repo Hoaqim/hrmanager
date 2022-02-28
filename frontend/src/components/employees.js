@@ -1,7 +1,9 @@
 import React, { Component } from "react";
 import CustomModal from "./Modal.js";
 import axios from "axios";
-import Payment from './Payment.js';
+import {Row,Col,CardBody, Card,CardText,CardTitle} from 'reactstrap';
+import CustomToast from "./Toast.js"
+import styles from '../css/employee.css';
 
 export default class Employee extends Component {
   constructor(props) {
@@ -9,6 +11,12 @@ export default class Employee extends Component {
     this.state = {
       employeeList: [],
       modal: false,
+      toast: false,
+      currentToast:"",
+      toastItem:{
+        salary:"",
+        bank_account:""
+      },
       activeItem: {
         name: "", 
         email: "", 
@@ -18,7 +26,6 @@ export default class Employee extends Component {
       },
     };
   }
-
 
   componentDidMount(){
     this.refreshList();
@@ -35,6 +42,10 @@ export default class Employee extends Component {
     this.setState({modal:!this.state.modal})
   }
   
+  toggleToast = () =>{
+    this.setState({toast:!this.state.toast})
+  }
+
   handleSubmit=(item) => {
     this.toggle();
     if (item.id){
@@ -64,54 +75,68 @@ export default class Employee extends Component {
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
-
+  showInfo = (item) =>{
+    this.setState({
+      activeItem: item, 
+      toast: !this.state.toast,
+      currentToast: item.id})
+  }
+  
   renderItems = () =>{
     const newItems = this.state.employeeList
 
     return newItems.map((item) => (
-      <li className="item-id"
-      key={item.id}
-      >
-        <span
-        className="item-name"
-        title={item.email}
-        >
-        {item.name}
-        </span>
-        <span>
-          <button onClick={() => this.editItem(item)}>
-            edit
-          </button>
-          <button className="btn brn-secondary" onClick={() => this.handleDelete(item)}>
-            delete
-          </button>
-
-          <Payment name={item.name} bank_account={item.bank_account} salary={item.salary}></Payment>
-        </span>
-      </li>
+    <Col className="item">
+      <Card className="item-card bg-info" id={`${this.state.activeItem.id}`} onClick={() => this.showInfo(item)}>
+        <CardBody>
+          <CardTitle>
+            {item.name}
+          </CardTitle>
+          <CardText>
+            position: {item.position} <br/>
+            email: {item.email}
+          </CardText>
+              <button className="btn btn-primary" onClick={() => this.editItem(item)}>
+                edit
+              </button>
+              <button className="btn btn-danger" onClick={() => this.handleDelete(item)}>
+                delete
+              </button>
+        </CardBody>
+      </Card>           
+      {this.state.toast&&this.state.currentToast===item.id?(
+        <CustomToast
+          activeItem={this.state.activeItem}
+          toggleToast={this.toggleToast}
+        />):null}
+    </Col>
+    
     ))
   }
 
   render(){
     return(
       <div className="container">
-        <div className="menu">
-        </div>
         <h1>List of employees</h1>
           <div className="button">
-            <button className="btn btn-primary" onClick={this.createItem}>
+            <button className="btn btn-dark" onClick={this.createItem}>
               Add employee
             </button>
           </div>
-        <div className="Items">
-          {this.renderItems()}
-        </div>
+
+            <Row xs="4">  
+              {this.renderItems()}
+            </Row>
+
+
+
         {this.state.modal?(
         <CustomModal 
         activeItem={this.state.activeItem}
         toggle={this.toggle}
         onSave={this.handleSubmit}
         />):null}
+        
       </div>
     )
   }
