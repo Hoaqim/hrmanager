@@ -1,6 +1,7 @@
 body{
-    background-color:aliceblue;
+    background-color:lightblue !important;
 }
+
 .item{
     padding-top:20px;
 }
