@@ -1,4 +1,4 @@
-import React, { Component, useState } from "react";
+import React, { Component } from "react";
 import CustomModal from "./Modal.js";
 import axios from "axios";
 import { Row, Col, CardBody, Card, CardText, CardTitle } from "reactstrap";
@@ -29,6 +29,7 @@ export default class Employee extends Component {
   }
 
   componentDidMount() {
+    this.setState({ inputText: "" });
     this.refreshList();
   }
 
