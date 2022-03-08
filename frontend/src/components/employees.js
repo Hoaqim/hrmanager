@@ -43,7 +43,6 @@ export default class Employee extends Component {
   toggle = () => {
     this.setState({ modal: !this.state.modal });
   };
-
   toggleToast = () => {
     this.setState({ toast: !this.state.toast });
   };
@@ -79,12 +78,16 @@ export default class Employee extends Component {
     this.setState({ activeItem: item, modal: !this.state.modal });
   };
 
-  showInfo = (item) => {
-    this.setState({
-      activeItem: item,
-      toast: !this.state.toast,
-      currentToast: item.id,
-    });
+  showInfo = (e, item) => {
+    if (e.target.name === "btn") {
+      e.preventDefault();
+      e.stopPropagation();
+    } else
+      this.setState({
+        activeItem: item,
+        toast: !this.state.toast,
+        currentToast: item.id,
+      });
   };
 
   inputHandler = (e) => {
@@ -110,7 +113,7 @@ export default class Employee extends Component {
           <Card
             className="item-card bg-info"
             id={`${this.state.activeItem.id}`}
-            onClick={() => this.showInfo(item)}
+            onClick={(e) => this.showInfo(e, item)}
           >
             <CardBody>
               <CardTitle>{item.name}</CardTitle>
@@ -120,12 +123,14 @@ export default class Employee extends Component {
               </CardText>
               <button
                 className="btn btn-primary"
+                name="btn"
                 onClick={() => this.editItem(item)}
               >
                 edit
               </button>
               <button
                 className="btn btn-danger"
+                name="btn"
                 onClick={() => this.handleDelete(item)}
               >
                 delete
@@ -145,9 +150,17 @@ export default class Employee extends Component {
   render() {
     return (
       <div className="container">
-        <h1>List of employees</h1>
-        <div className="search-bar">
-          <input type="text" onChange={this.inputHandler}></input>
+        <div className="flexbox">
+          <h1>List of employees</h1>
+          <div className="search-bar">
+            <div>
+              <input
+                type="text"
+                placeholder="Search"
+                onChange={this.inputHandler}
+              ></input>
+            </div>
+          </div>
         </div>
         <div className="button">
           <button className="btn btn-dark" onClick={this.createItem}>
@@ -155,7 +168,9 @@ export default class Employee extends Component {
           </button>
         </div>
 
-        <Row xs="4">{this.renderItems()}</Row>
+        <Row xs="4" className="row-items">
+          {this.renderItems()}
+        </Row>
 
         {this.state.modal ? (
           <CustomModal

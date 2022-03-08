@@ -1,12 +1,75 @@
-body{
-    background-color:lightblue !important;
+body {
+  background-color: lightblue !important;
 }
 
-.item{
-    padding-top:20px;
+.row-items,
+.textarea {
+  padding-top: 20px;
+  min-height: "100vh";
+  padding-bottom: 20px;
 }
 
-.item-card:hover{
-cursor: pointer;
-transform: scale(1.05);
+.item-card:hover {
+  cursor: pointer;
+  transform: scale(1.05);
+}
+
+/* for search box */
+
+.flexbox > h1 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flexbox > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.search-bar {
+  float: right;
+}
+
+.search-bar > div {
+  display: inline-block;
+  position: relative;
+  filter: drop-shadow(0 1px #0091c2);
+}
+
+.search-bar > div::after {
+  content: "";
+  background: white;
+  width: 4px;
+  height: 20px;
+  position: absolute;
+  top: 20px;
+  transform: rotate(135deg);
+}
+
+.search-bar > div > input {
+  color: white;
+  font-size: 16px;
+  background: transparent;
+  width: 25px;
+  height: 25px;
+  padding: 10px;
+  border: solid 3px white;
+  outline: none;
+  border-radius: 35px;
+  transition: width 0.5s;
+}
+
+.search-bar > div > input::placeholder {
+  color: white;
+  opacity: 0;
+  transition: opacity 150ms ease-out;
+}
+
+.search-bar > div > input:focus::placeholder {
+  opacity: 1;
+}
+
+.search-bar > div > input:focus,
+.search-bar > div > input:not(:placeholder-shown) {
+  width: 250px;
 }

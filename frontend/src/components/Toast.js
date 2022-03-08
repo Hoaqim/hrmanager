@@ -1,27 +1,29 @@
-import React, { Component } from 'react';
-import {Toast,ToastHeader,ToastBody} from 'reactstrap';
+import React, { Component } from "react";
+import { Toast, ToastHeader, ToastBody } from "reactstrap";
 
 export default class customToast extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-          activeItem: this.props.activeItem,
-        };
-      }
+  constructor(props) {
+    super(props);
+    this.state = {
+      activeItem: this.props.activeItem,
+    };
+  }
 
-    render() {
+  render() {
     const toggleToast = this.props;
-    
+
     return (
-          <Toast isOpen={true} toggle={toggleToast} id={`${this.state.activeItem.id}`}>
-        <ToastHeader toggle={function toggleToast(){}}>
-            details
-        </ToastHeader>
+      <Toast
+        isOpen={true}
+        toggle={toggleToast}
+        id={`${this.state.activeItem.id}`}
+      >
+        <ToastHeader>details</ToastHeader>
         <ToastBody>
-            salary: {this.state.activeItem.salary} <br />
-            bank account: {this.state.activeItem.bank_account} <br />
+          salary: {this.state.activeItem.salary} <br />
+          bank account: {this.state.activeItem.bank_account} <br />
         </ToastBody>
-    </Toast>
-    )
+      </Toast>
+    );
   }
 }
